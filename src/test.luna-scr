@@ -1,0 +1,4 @@
+// This is simply a test script. It will create the category "apiexample" and insert "test" into the category "hello".
+// Keep in mind that scripts do not run until you run them!
+
+insert apiexample hello test
