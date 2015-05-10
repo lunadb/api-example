@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 import com.arrayprolc.lunadb.api.LunaDBScript;
 import com.arrayprolc.lunadb.api.LunaServer;
 
@@ -9,18 +11,22 @@ public class APITest {
         LunaServer server = new LunaServer("localhost:415", "testKey");
 
         // Define where the script is located. If the script is packaged inside
-        // the .jar, use */ as a prefix.
-        LunaDBScript script = new LunaDBScript("*/test.luna-scr", "testCategory");
+        // the .jar, use */ as a prefix. The third argument is the "run name", or the name that the database will know the file as.
+        LunaDBScript script = new LunaDBScript("*/test.luna-scr", "testCategory", "test");
 
         try {
-            
+
             // The script.send() method uses our LunaServer object. Also note
             // that if you are looking
             // inside the packaged JAR you must specify the main class object,
             // otherwise set it to null.
             System.out.println("Sent success?: " + script.send(server, APITest.class));
-        } catch (Exception e) {
             
+            // The script.run() method only takes our server object, and returns
+            // an ArrayList of strings (result of each line). This program
+            // simply prints them on the screen.
+            System.out.println("Running results: " + Arrays.toString(script.run(server).toArray()));
+        } catch (Exception e) {
             // If it failed, print out why.
             e.printStackTrace();
         }
